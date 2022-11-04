@@ -9,7 +9,7 @@ class AppAssets {
     // icons
     'chat_icons': '$_icons/chat_icon.svg',
   };
-  static SvgPicture walkthrough({double? height}) {
+  static SvgPicture walkthrough({double? height = 200}) {
     return SvgPicture.asset(
       _paths['walkthrough']!,
       height: height,

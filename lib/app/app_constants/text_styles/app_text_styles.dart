@@ -8,6 +8,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w900,
     color: AppColors.black,
   );
+  static TextStyle mulishBlack24w700 = GoogleFonts.mulish(
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    color: AppColors.black,
+  );
   static TextStyle mulishWhite16w600 = GoogleFonts.mulish(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -16,6 +21,12 @@ class AppTextStyles {
   static TextStyle mulishBlack14w600 = GoogleFonts.mulish(
     fontSize: 14,
     fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
+
+  static TextStyle mulishBlack14w400 = GoogleFonts.mulish(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
     color: AppColors.black,
   );
 }

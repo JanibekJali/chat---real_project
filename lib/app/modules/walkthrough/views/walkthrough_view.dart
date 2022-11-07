@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:real_project/app/app_constants/assets/app_assets.dart';
 import 'package:real_project/app/app_constants/text_styles/app_text_styles.dart';
 import 'package:real_project/app/app_widgets/buttons/custom_button_widget.dart';
+import 'package:real_project/app/routes/app_pages.dart';
 
 import '../controllers/walkthrough_controller.dart';
 
@@ -40,8 +41,9 @@ class WalkthroughView extends GetView<WalkthroughController> {
                 CustomButtonWidget(
                   buttonText: 'Start Messaging',
                   buttonTextStyle: AppTextStyles.mulishWhite16w600,
-                  buttonVer: Get.size.height * 0.025,
-                  buttonHor: Get.size.width * 0.3,
+                  buttonVer: Get.size.height * 0.020,
+                  buttonHor: Get.size.width * 0.35,
+                  onTap: () => Get.toNamed(Routes.PHONE_VERIFICATION),
                 ),
               ],
             ),

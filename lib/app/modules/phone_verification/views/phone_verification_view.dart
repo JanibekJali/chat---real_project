@@ -146,9 +146,8 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
             ),
           ),
         ),
-        elevation: 0, systemOverlayStyle: SystemUiOverlayStyle.dark,
-        // title: const Text('PhoneVerificationView'),
-        // centerTitle: true,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SafeArea(
         child: Padding(

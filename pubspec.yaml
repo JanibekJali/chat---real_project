@@ -10,9 +10,12 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
+  # svg, icon, font
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
+  # input
   numeric_keyboard: ^1.1.0
+  #country icons
   country_icons: ^2.0.2
 
 dev_dependencies: 

@@ -9,6 +9,7 @@ import 'package:real_project/app/app_constants/text_styles/app_text_styles.dart'
 import 'package:real_project/app/app_constants/widgets/app_constant_widgets.dart';
 import 'package:real_project/app/app_widgets/buttons/custom_button_widget.dart';
 import 'package:real_project/app/data/models/global_models/country_with_flags.dart';
+import 'package:real_project/app/data/repos/local_data/local_data_repo.dart';
 
 //GetView<PhoneVerificationController>
 class PhoneVerificationView extends StatefulWidget {
@@ -20,65 +21,40 @@ class PhoneVerificationView extends StatefulWidget {
 
 class _PhoneVerificationViewState extends State<PhoneVerificationView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   final TextEditingController controller = TextEditingController();
+
   String _usersPhoneNumber = '';
 
   List<DropdownMenuItem<CountryWithFlags>>? _dropDownMenuItems;
   CountryWithFlags? _selectedCountry;
   @override
   void initState() {
-    _dropDownMenuItems = buildDropDownMenuItems() ;
+    _dropDownMenuItems = LocalDataRepo.buildDropDownMenuItems();
     _selectedCountry = _dropDownMenuItems![0].value;
     super.initState();
   }
 
-  List<DropdownButton<CountryWithFlags>> buildDropDownMenuItems() {
-    List<DropdownButton<CountryWithFlags>> items =
-        <DropdownButton<CountryWithFlags>>[];
-    for (CountryWithFlags country in _countries) {
-      items.add(
-        DropdownButton<CountryWithFlags>(
-            value: country,
-            child: Row(
-              children: [
-                country.flag!,
-                Text(
-                  country.phoneCode!,
-                  style: AppTextStyles.mulishBlack14w600,
-                ),
-              ],
-            )),
-      );
-    
-    }
-    
-  }
-
   void _onKeyboardTap(String value) {
-    setState(() {
-      _usersPhoneNumber = _usersPhoneNumber + value;
-    });
-    log('text: $_usersPhoneNumber');
-  }
+    // If kyrgyzstan's phone number
+    if (_selectedCountry!.phoneCode!.length == 4) {
+      if (_usersPhoneNumber.length < 9) {
+        _usersPhoneNumber = _usersPhoneNumber + value;
+      }
+      // If russia's phone number
+    } else if (_selectedCountry!.phoneCode!.length == 2) {
+      if (_usersPhoneNumber.length < 10) {
+        _usersPhoneNumber = _usersPhoneNumber + value;
+        // If turkey's phone number
+      } else if (_selectedCountry!.phoneCode!.length == 3) {
+        if (_usersPhoneNumber.length < 10) {
+          _usersPhoneNumber = _usersPhoneNumber + value;
+        }
+      }
+    }
 
-  funksia() {
-    return Row(
-      children: [
-        Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(
-                  _usersPhoneNumber == '' ? 'Phone number' : _usersPhoneNumber,
-                  style: AppTextStyles.mulishBlack14w600,
-                ),
-              )
-            ],
-          ),
-        )
-      ],
-    );
+    setState(() {});
+    log('text: $_usersPhoneNumber');
   }
 
   Widget _phoneContainer() {
@@ -149,6 +125,7 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -209,6 +186,9 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: Get.size.height * 0.1,
+              ),
               CustomButtonWidget(
                 buttonText: 'Continue',
                 buttonVer: Get.size.height * 0.020,
@@ -216,14 +196,30 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
                 buttonTextStyle: AppTextStyles.mulishWhite16w600,
                 onTap: () {
                   String? code;
-                  setState(() {
-                    code = '${_selectedCountry!.phoneCode!} $_usersPhoneNumber';
-                  });
-                  if (_usersPhoneNumber.isNotEmpty) {
-                    Get.to(() => PhoneOtp(code: code));
-                  } else {
+
+                  if (_usersPhoneNumber.isEmpty) {
                     Get.snackbar('Warning!', 'Please put your phone number!');
+                    // Get.to(() => PhoneOtp(code: code));
+                  } else if (_selectedCountry!.phoneCode == '+996' &&
+                      _usersPhoneNumber.length == 9) {
+                    code = _setCodeBeforeSending();
+                    setState(() {});
+                    // Get.to(() => PhoneOtp(code: code));
+                  } else if (_selectedCountry!.phoneCode == '+7' &&
+                      _usersPhoneNumber.length == 10) {
+                    code = _setCodeBeforeSending();
+                    setState(() {});
+                    // Get.to(() => PhoneOtp(code: code));
+                  } else if (_selectedCountry!.phoneCode == '+90' &&
+                      _usersPhoneNumber.length == 10) {
+                    code = _setCodeBeforeSending();
+                    setState(() {});
+                    // Get.to(() => PhoneOtp(code: code));
+                  } else {
+                    Get.snackbar(
+                        'Warning!', 'Please enter enough phone number!');
                   }
+                  log('code ======> $code');
                 },
               ),
               const SizedBox(
@@ -249,16 +245,38 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
                   },
                 ),
               ),
-              // Expanded(child: KeyPad())
             ],
           ),
         ),
       ),
     );
   }
+
+  String _setCodeBeforeSending() {
+    // _code = _selectedCountry!.phoneCode! + ' ' + _usersPhoneNumber;
+    return '${_selectedCountry!.phoneCode!} $_usersPhoneNumber';
+  }
 }
 
-
-
-// Flutter textField hide keyboard 
+// Flutter textField hide keyboard
 // read only
+
+// funksia() {
+//   return Row(
+//     children: [
+//       Container(
+//         child: Column(
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.only(left: 8),
+//               child: Text(
+//                 _usersPhoneNumber == '' ? 'Phone number' : _usersPhoneNumber,
+//                 style: AppTextStyles.mulishBlack14w600,
+//               ),
+//             )
+//           ],
+//         ),
+//       )
+//     ],
+//   );
+// }

@@ -18,9 +18,10 @@ class FirebaseAuthenticationService extends AuthenticationService {
   }
 
   @override
-  Future<UserModel> getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
+  Future<UserModel> getCurrentUser() async {
+    return Future.delayed(const Duration(seconds: 1), () {
+      return const UserModel(userId: '001', name: 'FireBase');
+    });
   }
 
   @override
@@ -40,6 +41,59 @@ class AuthenticationException implements Exception {
   final String message;
 
   AuthenticationException({this.message = 'Unknown error occurred. '});
+}
+
+class AwsAuthenticationService extends AuthenticationService {
+  @override
+  Future<UserModel> getCurrentCachedUser() {
+    // TODO: implement getCurrentCachedUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserModel> getCurrentUser() async {
+    return Future.delayed(const Duration(seconds: 1), () {
+      return const UserModel(userId: '002 ', name: 'AWS');
+    });
+  }
+
+  @override
+  Future signInWithPhone(String phoneNumber) {
+    // TODO: implement signInWithPhone
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
+  }
+}
+
+class BashkaServis extends AuthenticationService {
+  @override
+  Future<UserModel> getCurrentCachedUser() {
+    // TODO: implement getCurrentCachedUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserModel> getCurrentUser() {
+    // TODO: implement getCurrentUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future signInWithPhone(String phoneNumber) {
+    // TODO: implement signInWithPhone
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
+  }
 }
 
 

@@ -10,13 +10,17 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
-  # svg, icon, font
+  #svg, icon, font
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
-  # input
+  #input
   numeric_keyboard: ^1.1.0
   #country icons
   country_icons: ^2.0.2
+  firebase_auth: ^4.1.3
+  firebase_core: ^2.3.0
+  #others
+  equatable: ^2.0.5
 
 dev_dependencies: 
   flutter_lints: 2.0.1

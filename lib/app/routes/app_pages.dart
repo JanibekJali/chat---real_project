@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/phone_verification/bindings/phone_verification_binding.dart';
 import '../modules/phone_verification/views/phone_verification_view.dart';
+import '../modules/redirect/bindings/redirect_binding.dart';
+import '../modules/redirect/views/redirect_view.dart';
 import '../modules/walkthrough/bindings/walkthrough_binding.dart';
 import '../modules/walkthrough/views/walkthrough_view.dart';
 
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.PHONE_VERIFICATION,
       page: () => const PhoneVerificationView(),
       binding: PhoneVerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.REDIRECT,
+      page: () => RedirectView(),
+      binding: RedirectBinding(),
     ),
   ];
 }

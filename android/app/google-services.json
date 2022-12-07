@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "747993995723",
-    "project_id": "real-flutter-app",
-    "storage_bucket": "real-flutter-app.appspot.com"
+    "project_number": "837851917927",
+    "project_id": "chatapparai",
+    "storage_bucket": "chatapparai.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747993995723:android:490ab2c977ea5f6428fe4e",
+        "mobilesdk_app_id": "1:837851917927:android:02e107b91adea5364deec2",
         "android_client_info": {
           "package_name": "com.pamir_chat.real_project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "747993995723-aedqmss9bl0o7dke1ish26qq5mcbdra6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pamir_chat.real_project",
-            "certificate_hash": "d44ffedca0e11d9e4cd49a2209a58a93dcbfbdd4"
-          }
-        },
-        {
-          "client_id": "747993995723-vqq69uetuvp9bgitpsmbm862ivs71dlj.apps.googleusercontent.com",
+          "client_id": "837851917927-515n49fnm6rcmsbap0fdl4o1usn7uum8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZoWBqmSvk8M_TQL_BbP42RefONTd9GkA"
+          "current_key": "AIzaSyCbUpROSXiN-58rMwJ3cFBmpk0MiTz08Cs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "747993995723-vqq69uetuvp9bgitpsmbm862ivs71dlj.apps.googleusercontent.com",
+              "client_id": "837851917927-515n49fnm6rcmsbap0fdl4o1usn7uum8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

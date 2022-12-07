@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:real_project/app/data/models/user_model/user_model.dart';
+import 'package:real_project/app/data/repos/user/user_repo.dart';
+import 'package:real_project/app/data/services/firebase_auth/firebase_auth_service.dart';
 
 import '../authentication.dart';
 
@@ -11,8 +13,9 @@ class AuthenticationController extends GetxController {
   final Rx<AuthenticationState> _authState = const AuthenticationState().obs;
 
   final Rx<UserModel> _userModel = const UserModel().obs;
+  RxString verificationId = ''.obs;
 
-  AuthenticationState get state => _authState.value;
+  AuthenticationState get getState => _authState.value;
 
   UserModel get getCurrentUser => _userModel.value;
 
@@ -22,25 +25,108 @@ class AuthenticationController extends GetxController {
 
   @override
   void onInit() {
+    log('AuthenticationController is started working!');
     _getAuthenticatedUser();
     super.onInit();
   }
 
+// void _setState(){}
   void _getAuthenticatedUser() async {
     _authState.value = AuthenticationLoadingState();
+    log('_authState.value ====> ${_authState.value}');
 
-    final user = await _authenticationService.getCurrentUser();
-    // const user = null;
+    UserModel? user = await _authenticationService.getCurrentUser();
+    user = null;
 
     if (user == null || user == const UserModel()) {
       _authState.value = UnAuthenticatedState();
-      log('_getAuthenticatedUser =======> ${_authState.value}');
+      log('user jok _authState.value =======> ${_authState.value}');
     } else {
       // setAuthState(_user);
       _authState.value = AuthenticatedUserState(user);
-      log('_getAuthenticatedUser.setAuthState =======> ${_authState.value}');
+      log(
+        'user bar _authState.value =======> ${_authState.value}',
+      );
     }
   }
+
+  Future<void> verifyPhoneNumber({String? phoneNumber}) async {
+    await firebaseAuthService.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+    );
+    // verificationId.value == ''
+    // verificationId.value != ''
+    log('verificationId.value ==> ${verificationId.value}');
+    if (verificationId.value.isNotEmpty) {
+      _authState.value = OtpVerificationState(phoneNumber!);
+    }
+    // Get.to(() => PhoneOtp(code: phoneNumber!));
+  }
+
+  Future<void> sendSmsCode({String? smsCode}) async {
+    _authState.value = AuthenticationLoadingState();
+    final userModel = await userRepo.sendSmsCode(smsCode: smsCode);
+    _authState.value = AuthenticatedUserState(userModel!);
+  }
+  // void _login() async {
+  //   await FirebaseAuth.instance.verifyPhoneNumber(
+  //     phoneNumber: '+44 7123 123 456',
+  //     // verificationCompleted: (PhoneAuthCredential credential) {
+
+  //     // },
+  //     verificationFailed: (FirebaseAuthException e) {},
+  //     codeSent: (String verificationId, int? resendToken) {},
+  //     codeAutoRetrievalTimeout: (String verificationId) {},
+  //   );
+  // }
+
+  // _onVerificationCompleted(PhoneAuthCredential authCredential) async {
+  //   print("verification completed ${authCredential.smsCode}");
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   setState(() {
+  //     this.otpCode.text = authCredential.smsCode!;
+  //   });
+  //   if (authCredential.smsCode != null) {
+  //     try {
+  //       UserCredential credential =
+  //           await user!.linkWithCredential(authCredential);
+  //     } on FirebaseAuthException catch (e) {
+  //       if (e.code == 'provider-already-linked') {
+  //         await _auth.signInWithCredential(authCredential);
+  //       }
+  //     }
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     // Navigator.pushNamedAndRemoveUntil(
+  //     //     context, Constants.homeNavigate, (route) => false);
+  //   }
+  // }
+
+  // _onVerificationFailed(FirebaseAuthException exception) {
+  //   if (exception.code == 'invalid-phone-number') {
+  //     // showMessage("The phone number entered is invalid!");
+  //   }
+  // }
+
+  // _onCodeSent(String verificationId, int? forceResendingToken) {
+  //   this.verificationId = verificationId;
+  //   print('forceResendingToken ===> $forceResendingToken');
+  //   print("code sent");
+  // }
+
+  // _onCodeTimeout(String timeout) {
+  //   return null;
+  // }
+
+  // void login({String? phoneNumber}) async {
+  //   await FirebaseAuth.instance.verifyPhoneNumber(
+  //     verificationCompleted: _onVerificationCompleted,
+  //     verificationFailed: _onVerificationFailed,
+  //     codeSent: _onCodeSent,
+  //     codeAutoRetrievalTimeout: _onCodeTimeout,
+  //   );
+  // }
 }
 
 // class UnUsed{

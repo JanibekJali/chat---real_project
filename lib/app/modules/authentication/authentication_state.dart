@@ -27,6 +27,15 @@ class AuthenticatedUserState extends AuthenticationState {
   List<Object> get props => [user];
 }
 
+class OtpVerificationState extends AuthenticationState {
+  final String phoneNumber;
+
+  const OtpVerificationState(this.phoneNumber);
+
+  @override
+  List<Object> get props => [phoneNumber];
+}
+
 class AuthenticationFailureState extends AuthenticationState {
   final String message;
 

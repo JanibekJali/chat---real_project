@@ -20,7 +20,7 @@ class FirebaseAuthenticationService extends AuthenticationService {
   @override
   Future<UserModel> getCurrentUser() async {
     return Future.delayed(const Duration(seconds: 1), () {
-      return const UserModel(userId: '001', name: 'FireBase');
+      return const UserModel(userID: '001', name: 'FireBase');
     });
   }
 
@@ -53,7 +53,7 @@ class AwsAuthenticationService extends AuthenticationService {
   @override
   Future<UserModel> getCurrentUser() async {
     return Future.delayed(const Duration(seconds: 1), () {
-      return const UserModel(userId: '002 ', name: 'AWS');
+      return const UserModel(userID: '002 ', name: 'AWS');
     });
   }
 

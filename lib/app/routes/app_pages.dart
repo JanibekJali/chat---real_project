@@ -14,7 +14,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PHONE_VERIFICATION;
+  static const INITIAL = Routes.REDIRECT;
 
   static final routes = [
     GetPage(
@@ -31,6 +31,11 @@ class AppPages {
       name: _Paths.PHONE_VERIFICATION,
       page: () => const PhoneVerificationView(),
       binding: PhoneVerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.REDIRECT,
+      page: () => RedirectView(),
+      binding: RedirectBinding(),
     ),
     GetPage(
       name: _Paths.REDIRECT,

@@ -197,7 +197,7 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
                 buttonHor: Get.size.width * 0.35,
                 buttonTextStyle: AppTextStyles.mulishWhite16w600,
                 onTap: () async {
-                  String? phoneNumber;
+                  String? phoneNumber = '';
 
                   if (_usersPhoneNumber.isEmpty) {
                     Get.snackbar('Warning!', 'Please put your phone number!');
@@ -207,7 +207,8 @@ class _PhoneVerificationViewState extends State<PhoneVerificationView> {
                     phoneNumber = _setCodeBeforeSending();
                     setState(() {});
                     await _authenticationController.verifyPhoneNumber(
-                        phoneNumber: phoneNumber);
+                      phoneNumber: phoneNumber,
+                    );
                   } else if (_selectedCountry!.phoneCode == '+7' &&
                       _usersPhoneNumber.length == 10) {
                     phoneNumber = _setCodeBeforeSending();

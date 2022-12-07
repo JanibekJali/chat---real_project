@@ -56,6 +56,9 @@ class AuthenticationController extends GetxController {
     );
     // verificationId.value == ''
     // verificationId.value != ''
+
+    // number: 00 00 0 11 22     
+    // code: 17499
     log('verificationId.value ==> ${verificationId.value}');
     if (verificationId.value.isNotEmpty) {
       _authState.value = OtpVerificationState(phoneNumber!);
